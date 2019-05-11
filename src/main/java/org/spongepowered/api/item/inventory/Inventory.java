@@ -158,12 +158,12 @@ public interface Inventory extends Nameable, PropertyHolder {
      * Adds multiple ItemStacks to this inventory.
      * <p>This is equivalent to {@link InventoryTransactionResult#and}ing the results of multiple {@link #offer(ItemStack)} together.</p>
      *
-     * @param stack The stacks to add to this inventory.
+     * @param stacks The stacks to add to this inventory.
      *
      * @return A SUCCESS transaction-result if all stacks were added and
      *           FAILURE when at least one stack was not or only partially added to the inventory.
      */
-    InventoryTransactionResult offer(ItemStack... stack);
+    InventoryTransactionResult offer(ItemStack... stacks);
 
     /**
      * Returns true if the entire stack can fit in this inventory.

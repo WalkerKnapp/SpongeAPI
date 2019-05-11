@@ -36,7 +36,7 @@ public interface Query {
      *
      * @param queries The queries to append
      *
-     * @return the new query
+     * @return The new query
      */
     Query append(Query... queries);
 
@@ -45,7 +45,16 @@ public interface Query {
      *
      * @param queries The queries to match
      *
-     * @return the new query
+     * @return The new query
      */
     Query or(Query... queries);
+
+    /**
+     * Executes this query on given inventory
+     *
+     * @param inventory The query
+     *
+     * @return The query result
+     */
+    Inventory execute(Inventory inventory);
 }
