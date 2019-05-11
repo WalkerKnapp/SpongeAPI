@@ -111,7 +111,7 @@ public interface GridInventory extends Inventory2D {
     /**
      * Sets the item in the specified slot.
      *
-     * @see Inventory#set(ItemStack)
+     * @see Slot#set(ItemStack)
      * @param x x coordinate
      * @param y y coordinate
      * @param stack Item stack to insert

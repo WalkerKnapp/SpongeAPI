@@ -24,19 +24,28 @@
  */
 package org.spongepowered.api.item.inventory.query;
 
+import org.spongepowered.api.item.inventory.Inventory;
+
 /**
- * Represents an operation that is part of a query. The details of the
- * filtering are implementation-specific and are not exposed in this
- * interface.
+ * An inventory query. See {@link QueryTypes} for possible types of queries.
  */
-public interface QueryOperation<T> {
+public interface Query {
 
     /**
-     * Returns the {@link QueryOperationType} used to
-     * {@linkplain QueryOperationType#of(Object) create} this query operation.
+     * Returns a new query which combines the queries in given order with {@link Inventory#union}
      *
-     * @return The type of this query operation
+     * @param queries The queries to append
+     *
+     * @return the new query
      */
-    QueryOperationType<T> getType();
+    Query append(Query... queries);
 
+    /**
+     * Returns a new query matching any of the queries.
+     *
+     * @param queries The queries to match
+     *
+     * @return the new query
+     */
+    Query or(Query... queries);
 }

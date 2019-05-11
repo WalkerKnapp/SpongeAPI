@@ -28,6 +28,8 @@ import com.flowpowered.math.vector.Vector2i;
 import org.spongepowered.api.data.property.Property;
 import org.spongepowered.api.data.property.PropertyHolder;
 import org.spongepowered.api.item.inventory.equipment.EquipmentType;
+import org.spongepowered.api.item.inventory.type.GridInventory;
+import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.Direction;
 import org.spongepowered.api.util.generator.dummy.DummyObjectProvider;
@@ -43,6 +45,10 @@ public final class InventoryProperties {
 
     // SORTFIELDS:ON
 
+    // TODO new properties
+    public static final Property<PluginContainer> CREATOR = null;
+    public static final Property<Integer> MAX_STACK_SIZE = null;
+
     /**
      * Represents the {@link EquipmentType} that the target inventory supports.
      */
@@ -51,12 +57,15 @@ public final class InventoryProperties {
 
     /**
      * Represents the capacity of a inventory.
+     * TODO not present in impl | do we need this for query? {@link Inventory#capacity()} exists
+     *
      */
     public static final Property<Integer> CAPACITY =
             DummyObjectProvider.createFor(Property.class, "CAPACITY");
 
     /**
      * Represents the dimension of a inventory.
+     * TODO not present in impl | do we need this for query? {@link GridInventory#getRows()} and {@link GridInventory#getColumns()} exists
      */
     public static final Property<Vector2i> DIMENSION =
             DummyObjectProvider.createFor(Property.class, "DIMENSION");
@@ -76,8 +85,7 @@ public final class InventoryProperties {
             DummyObjectProvider.createFor(Property.class, "SLOT_POSITION");
 
     /**
-     * A property which represents a "side" for a particular slot,
-     * for use in querying "sided inventories".
+     * A property which represents a "side" for a particular slot, for use in querying "sided inventories".
      */
     public static final Property<Direction> SLOT_SIDE =
             DummyObjectProvider.createFor(Property.class, "SLOT_SIDE");
@@ -85,13 +93,14 @@ public final class InventoryProperties {
     /**
      * Represents the {@link UUID} of a inventory.
      */
+    // TODO not present in impl for query atm.
     public static final Property<UUID> UNIQUE_ID =
             DummyObjectProvider.createFor(Property.class, "UNIQUE_ID");
 
     /**
-     * Represents the title of a inventory, is
-     * viewable by players looking at the inventory.
+     * Represents the title of a inventory, is viewable by players looking at the inventory.
      */
+    // TODO maybe not present in impl? most inventories dont have a title. also title only shows in Containers
     public static final Property<Text> TITLE =
             DummyObjectProvider.createFor(Property.class, "TITLE");
 

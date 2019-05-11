@@ -93,7 +93,14 @@ public interface InventoryTransactionResult {
          *
          * <p>The state of the inventory is undefined.</p>
          */
-        ERROR
+        ERROR,
+
+        /**
+         * The inventory operation failed because there was no slot at given index.
+         *
+         * <p>The state of the inventory is unchanged</p>
+         */
+        NO_SLOT
 
     }
 

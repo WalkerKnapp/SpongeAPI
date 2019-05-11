@@ -24,6 +24,8 @@
  */
 package org.spongepowered.api.item.inventory;
 
+import org.spongepowered.api.item.inventory.transaction.InventoryTransactionResult;
+
 /**
  * A slot is an {@link Inventory} with only a single stack.
  */
@@ -35,4 +37,18 @@ public interface Slot extends Inventory {
      * @return the viewed inventory slot or itself if not a container slot
      */
     Slot viewedSlot();
+
+    /**
+     * Adds the ItemStack to this slot overwriting the existing item.
+     *
+     * <p>The size of the supplied stack is reduced by the number of items successfully added to the slot.</p>
+     *
+     * <p>Stacks bigger than the max stack size will be partially rejected.</p>
+
+     * @param stack The stack to add to this slot. Its quantity will be reduced by the amount added.
+
+     * @return A SUCCESS transaction-result if the entire stack was added and
+     *           FAILURE when the stack was not or only partially added to the inventory.
+     */
+    InventoryTransactionResult set(ItemStack stack);
 }

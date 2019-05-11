@@ -22,28 +22,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+@org.spongepowered.api.util.annotation.NonnullByDefault
 package org.spongepowered.api.item.inventory.query;
-
-import org.spongepowered.api.CatalogType;
-import org.spongepowered.api.item.inventory.Inventory;
-import org.spongepowered.api.util.annotation.CatalogedBy;
-
-/**
- * Represents a possible type of operation for an {@linkplain
- * Inventory#query(QueryOperation...) inventory query}.
- *
- * @param <T> The argument type for the query
- */
-@CatalogedBy(QueryOperationTypes.class)
-public interface QueryOperationType<T> extends CatalogType {
-
-    /**
-     * Returns a query operation that tests for the specified argument.
-     *
-     * @param arg The object to test the inventory against
-     * @return A query that may be passed to {@link
-     * Inventory#query(QueryOperation...)}
-     */
-    QueryOperation<T> of(T arg);
-
-}
