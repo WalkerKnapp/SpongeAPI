@@ -38,25 +38,30 @@ public final class ContainerTypes {
     // SORTFIELDS:ON
 
     /**
+     * Size 5.
+     */
+    public static final ContainerType BREWING_STAND = DummyObjectProvider.createFor(ContainerType.class, "brewing_stand"); // "minecraft:brewing_stand"
+
+    /**
      * Size 27 (3x9 grid)
      */
     public static final ContainerType CHEST_3X9 = DummyObjectProvider.createFor(ContainerType.class, "chest_3x9"); // "minecraft:chest"
+
     /**
      * Size 54 (6x9 grid)
      */
     public static final ContainerType CHEST_6x9 = DummyObjectProvider.createFor(ContainerType.class, "chest_6x9"); // "minecraft:chest"
-    /**
-     * Size 3.
-     */
-    public static final ContainerType FURNACE = DummyObjectProvider.createFor(ContainerType.class, "furnace"); // "minecraft:furnace"
+
     /**
      * Size 9 (3x3 grid).
      */
     public static final ContainerType DISPENSER = DummyObjectProvider.createFor(ContainerType.class, "dispenser"); // "minecraft:dispenser"
+
     /**
-     * Size 5.
+     * Size 3.
      */
-    public static final ContainerType BREWING_STAND = DummyObjectProvider.createFor(ContainerType.class, "brewing_stand"); // "minecraft:brewing_stand"
+    public static final ContainerType FURNACE = DummyObjectProvider.createFor(ContainerType.class, "furnace"); // "minecraft:furnace"
+
     /**
      * Size 5 (1x5 grid).
      */
@@ -74,14 +79,6 @@ public final class ContainerTypes {
     // SORTFIELDS:ON
 
     /**
-     * Size 0. All slots present in the container only: 10 (3x3+1).
-     */
-    public static final ContainerType CRAFTING_TABLE = DummyObjectProvider.createFor(ContainerType.class, "crafting_table"); // "minecraft:crafting_table"
-    /**
-     * Size 0. All slots present in the container only 2.
-     */
-    public static final ContainerType ENCHANTING_TABLE = DummyObjectProvider.createFor(ContainerType.class, "enchanting_table"); // "minecraft:enchanting_table"
-    /**
      * Size 0. All slots present in the container only: 3.
      */
     public static final ContainerType ANVIL = DummyObjectProvider.createFor(ContainerType.class, "anvil"); // "minecraft:anvil"
@@ -90,6 +87,16 @@ public final class ContainerTypes {
      * Size 0. All slots present in the container only: 1.
      */
     public static final ContainerType BEACON = DummyObjectProvider.createFor(ContainerType.class, "beacon"); // "minecraft:beacon"
+
+    /**
+     * Size 0. All slots present in the container only: 10 (3x3+1).
+     */
+    public static final ContainerType CRAFTING_TABLE = DummyObjectProvider.createFor(ContainerType.class, "crafting_table"); // "minecraft:crafting_table"
+
+    /**
+     * Size 0. All slots present in the container only 2.
+     */
+    public static final ContainerType ENCHANTING_TABLE = DummyObjectProvider.createFor(ContainerType.class, "enchanting_table"); // "minecraft:enchanting_table"
 
     // SORTFIELDS:OFF
 

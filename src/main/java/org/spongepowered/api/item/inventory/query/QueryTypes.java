@@ -99,27 +99,6 @@ public final class QueryTypes {
      */
     public static final OneParam<Class<?>> TYPE = DummyObjectProvider.createExtendedFor(OneParam.class, "TYPE");
 
-    /**
-     * Query for a modified order of slots in a player inventory.
-     * Ordering the {@link Hotbar} before the {@link PrimaryPlayerInventory}
-     */
-    public static final NoParam PLAYER_PRIMARY_HOTBAR_FIRST = DummyObjectProvider.createFor(NoParam.class, "PLAYER_PRIMARY_HOTBAR_FIRST");
-
-    /**
-     * Query for a reverse order of slots.
-     */
-    public static final NoParam REVERSE = DummyObjectProvider.createFor(NoParam.class, "REVERSE");
-
-    /**
-     * Query for an empty inventory. This can be used as a base to {@link Query#append}/{@link Query#or} a list of queries.
-     */
-    public static final NoParam EMPTY = DummyObjectProvider.createFor(NoParam.class, "EMPTY");
-
-    /**
-     * A grid query. Only works on grids. The first value is the offset the second value is the grid size.
-     */
-    public static final TwoParam<Vector2i, Vector2i> GRID = DummyObjectProvider.createExtendedFor(TwoParam.class, "REVERSE");
-
     // SORTFIELDS:OFF
 
     // Suppress default constructor to ensure non-instantiability.
