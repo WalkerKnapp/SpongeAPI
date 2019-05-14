@@ -24,16 +24,16 @@
  */
 package org.spongepowered.api.block.entity;
 
-import org.spongepowered.api.command.source.CommandSource;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.value.ListValue;
 import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.util.NamedIdentifiable;
 
 /**
  * Represents a sign.
  */
-public interface Sign extends BlockEntity, Subject {
+public interface Sign extends BlockEntity, Subject, NamedIdentifiable {
 
     /**
      * Gets the {@link ListValue.Mutable} of {@link Text} for the {@link Sign}

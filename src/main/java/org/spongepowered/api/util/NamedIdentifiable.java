@@ -22,5 +22,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-@org.spongepowered.api.util.annotation.NonnullByDefault
-package org.spongepowered.api.command.source;
+package org.spongepowered.api.util;
+
+/**
+ * An identifiable object that uses a {@link String} as an identifier.
+ */
+public interface NamedIdentifiable {
+
+    /**
+     * The name that represents this object.
+     *
+     * @return The name.
+     */
+    String getName();
+
+}

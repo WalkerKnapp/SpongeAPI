@@ -28,7 +28,6 @@ import org.spongepowered.api.Server;
 import org.spongepowered.api.advancement.Advancement;
 import org.spongepowered.api.advancement.AdvancementProgress;
 import org.spongepowered.api.advancement.AdvancementTree;
-import org.spongepowered.api.command.source.CommandSource;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.type.SkinPart;
 import org.spongepowered.api.data.value.Value;
@@ -46,11 +45,13 @@ import org.spongepowered.api.network.PlayerConnection;
 import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.resourcepack.ResourcePack;
 import org.spongepowered.api.scoreboard.Scoreboard;
+import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.channel.ChatTypeMessageReceiver;
 import org.spongepowered.api.text.channel.MessageReceiver;
 import org.spongepowered.api.text.chat.ChatType;
 import org.spongepowered.api.text.chat.ChatVisibility;
+import org.spongepowered.api.util.NamedIdentifiable;
 import org.spongepowered.api.world.WorldBorder;
 
 import java.time.Instant;
@@ -68,7 +69,7 @@ import javax.annotation.Nullable;
  * <p>Any methods called on Player that are not on User do not store any data
  * that persists across server restarts.</p>
  */
-public interface Player extends Humanoid, User, Viewer, ChatTypeMessageReceiver, CommandSource {
+public interface Player extends Humanoid, User, Viewer, ChatTypeMessageReceiver, MessageReceiver, Subject {
 
     /**
      * Returns whether this player has an open inventory at the moment
