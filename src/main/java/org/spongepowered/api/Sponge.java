@@ -219,6 +219,16 @@ public final class Sponge {
     }
 
     /**
+     * Gets the {@link Console} instance from the {@link Game} instance.
+     *
+     * @see Game#getConsole()
+     * @return The console
+     */
+    public static Console getConsole() {
+        return getGame().getConsole();
+    }
+
+    /**
      * Gets the {@link CauseStackManager} instance from the
      * {@link Game} instance.
      *

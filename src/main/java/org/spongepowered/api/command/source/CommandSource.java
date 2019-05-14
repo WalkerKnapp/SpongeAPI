@@ -39,7 +39,8 @@ import java.util.Locale;
  *
  * <p>Note that while this source is provided, it is done so as a courtesy to
  * provide an indication as to what will both receive messages and act as a
- * permission {@link Subject}.</p>
+ * permission {@link Subject}. There is no guarantee that the cause of a
+ * command will contain a {@link CommandSource}.</p>
  */
 public interface CommandSource extends MessageReceiver, Subject {
 

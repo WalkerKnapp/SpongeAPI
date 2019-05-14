@@ -87,6 +87,13 @@ public interface Game {
     Server getServer();
 
     /**
+     * Gets the {@link Console}
+     *
+     * @return The console
+     */
+    Console getConsole();
+
+    /**
      * Returns if the {@link Client} is available for use. The result of this method is entirely
      * dependent on the implementation.
      *

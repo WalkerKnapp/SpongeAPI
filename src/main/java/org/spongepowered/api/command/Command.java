@@ -138,7 +138,7 @@ public interface Command {
 
     /**
      * Test whether this command can probably be executed given this
-     * {@link Cause} and {@link CommandSource}.
+     * {@link Cause}.
      *
      * <p>If implementations are unsure if the command can be executed by
      * the source, {@code true} should be returned. Return values of this method
@@ -385,15 +385,14 @@ public interface Command {
 
         /**
          * Provides a simple description for this command, typically no more
-         * than one line, which is dependent on the {@link Cause} and the
-         * responsible {@link CommandSource} that requests it.
+         * than one line, which is dependent on the {@link Cause} that requests
+         * it.
          *
          * <p>Fuller descriptions should be provided through
          * {@link #setExtendedDescription(Function)}</p>
          *
          * @param descriptionFunction A function that provides a relevant
-         *      description based on the supplied {@link Cause} and
-         *      {@link CommandSource}
+         *      description based on the supplied {@link Cause}
          * @return This builder, for chaining
          */
         Builder setShortDescription(Function<Cause, Optional<Text>> descriptionFunction);
@@ -416,8 +415,9 @@ public interface Command {
         }
 
         /**
-         * The permission that a {@link CommandSource} requires to run this
-         * command, or {@code null} if no permission is required.
+         * The permission that the responsible {@link Subject} in the given
+         * {@link Cause} requires to run this command, or {@code null} if no
+         * permission is required.
          *
          * <p>For more control over whether a command can be executed, use
          * {@link #setExecutionRequirements(Predicate)}. However, note that
@@ -441,7 +441,7 @@ public interface Command {
 
         /**
          * Sets a function that determines what is required of the provided
-         * {@link Cause} and {@link CommandSource} before this command executes.
+         * {@link Cause} before this command executes.
          *
          * <p>Any requirements here are in addition to the permission check
          * from {@link #setPermission(String)}</p>

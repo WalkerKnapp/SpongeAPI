@@ -44,6 +44,7 @@ import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.network.RemoteConnection;
 import org.spongepowered.api.plugin.PluginContainer;
+import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.Color;
 import org.spongepowered.api.util.ResettableBuilder;
@@ -909,8 +910,9 @@ public interface Parameter {
             Builder<T> setUsage(@Nullable ValueUsage usage);
 
             /**
-             * Sets the permission that the executing {@link CommandSource} is
-             * required to have in order for this parameter to be parsed.
+             * Sets a function that determines what is required of the
+             * appropriate {@link Subject} in the provided {@link Cause} before
+             * this parameter is parsed.
              *
              * <p>If the source does not have this permission, this parameter
              * will simply be skipped. Consider combining this with
