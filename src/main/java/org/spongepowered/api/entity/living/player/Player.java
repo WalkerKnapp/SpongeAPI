@@ -69,7 +69,7 @@ import javax.annotation.Nullable;
  * <p>Any methods called on Player that are not on User do not store any data
  * that persists across server restarts.</p>
  */
-public interface Player extends Humanoid, User, Viewer, ChatTypeMessageReceiver, MessageReceiver, Subject {
+public interface Player extends Humanoid, User, Viewer, ChatTypeMessageReceiver, Subject {
 
     /**
      * Returns whether this player has an open inventory at the moment
