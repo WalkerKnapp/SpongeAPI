@@ -87,11 +87,12 @@ public interface Game {
     Server getServer();
 
     /**
-     * Gets the {@link Console}
+     * Gets the {@link SystemSubject}. Depending on the implementation, this
+     * may also represent the game console.
      *
-     * @return The console
+     * @return The {@link SystemSubject}
      */
-    Console getConsole();
+    SystemSubject getSystemSubject();
 
     /**
      * Returns if the {@link Client} is available for use. The result of this method is entirely

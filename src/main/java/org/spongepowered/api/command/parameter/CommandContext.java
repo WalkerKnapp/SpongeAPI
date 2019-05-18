@@ -60,7 +60,7 @@ public interface CommandContext {
      *    <li>The {@link EventContextKeys#MESSAGE_CHANNEL}, if any</li>
      *    <li>A message channel containing the <strong>first</strong>
      *    {@link MessageReceiver} in the {@link Cause}</li>
-     *    <li>The Console {@link MessageReceiver}</li>
+     *    <li>The SystemSubject {@link MessageReceiver}</li>
      * </ul>
      *
      * <p>Note that this returns a {@link MessageChannel} and not what

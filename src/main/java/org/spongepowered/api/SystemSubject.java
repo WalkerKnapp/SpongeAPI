@@ -28,8 +28,16 @@ import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.text.channel.MessageReceiver;
 
 /**
- * Represents the game console
+ * Represents the "super user" of the game.
+ *
+ * <p>The {@link SystemSubject} is intended to be the {@link Subject} that
+ * represents server actions. This subject may represent an interaction
+ * through a console.</p>
+ *
+ * <p>This object is also a {@link MessageReceiver}. Any message sent here
+ * should be directed to a system visible location, such as a log or a
+ * console.</p>
  */
-public interface Console extends Subject, MessageReceiver {
+public interface SystemSubject extends Subject, MessageReceiver {
 
 }

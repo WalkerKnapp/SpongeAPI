@@ -219,13 +219,13 @@ public final class Sponge {
     }
 
     /**
-     * Gets the {@link Console} instance from the {@link Game} instance.
+     * Gets the {@link SystemSubject} instance from the {@link Game} instance.
      *
-     * @see Game#getConsole()
-     * @return The console
+     * @see Game#getSystemSubject() ()
+     * @return The system subject
      */
-    public static Console getConsole() {
-        return getGame().getConsole();
+    public static SystemSubject getSystemSubject() {
+        return getGame().getSystemSubject();
     }
 
     /**
