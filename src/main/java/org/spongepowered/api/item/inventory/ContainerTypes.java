@@ -35,6 +35,8 @@ public final class ContainerTypes {
 
     // Containers backed by an inventory.
 
+    // TODO add new inventories
+
     // SORTFIELDS:ON
 
     /**
@@ -91,12 +93,12 @@ public final class ContainerTypes {
     /**
      * Size 0. All slots present in the container only: 10 (3x3+1).
      */
-    public static final ContainerType CRAFTING_TABLE = DummyObjectProvider.createFor(ContainerType.class, "crafting_table"); // "minecraft:crafting_table"
+    public static final ContainerType CRAFTING_TABLE = DummyObjectProvider.createFor(ContainerType.class, "crafting_table");
 
     /**
      * Size 0. All slots present in the container only 2.
      */
-    public static final ContainerType ENCHANTING_TABLE = DummyObjectProvider.createFor(ContainerType.class, "enchanting_table"); // "minecraft:enchanting_table"
+    public static final ContainerType ENCHANTING_TABLE = DummyObjectProvider.createFor(ContainerType.class, "enchanting_table");
 
     // SORTFIELDS:OFF
 
@@ -107,12 +109,12 @@ public final class ContainerTypes {
     /**
      * Create a subtype of a {@link Horse} Entity instead of using this ContainerType.
      */
-    public static final ContainerType HORSE = DummyObjectProvider.createFor(ContainerType.class, "horse"); // "minecraft:horse" internally "EntityHorse"
+    public static final ContainerType HORSE = DummyObjectProvider.createFor(ContainerType.class, "horse");
 
     /**
      * Create a {@link Villager} Entity instead of using this ContainerType.
      */
-    public static final ContainerType VILLAGER = DummyObjectProvider.createFor(ContainerType.class, "villager"); // "minecraft:villager"
+    public static final ContainerType VILLAGER = DummyObjectProvider.createFor(ContainerType.class, "villager");
 
     // SORTFIELDS:OFF
 

@@ -24,7 +24,9 @@
  */
 package org.spongepowered.api.item.inventory.query;
 
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.util.ResettableBuilder;
 
 /**
  * An inventory query. See {@link QueryTypes} for possible types of queries.
@@ -32,13 +34,13 @@ import org.spongepowered.api.item.inventory.Inventory;
 public interface Query {
 
     /**
-     * Returns a new query which combines the queries in given order with {@link Inventory#union}
+     * Returns the query builder.
      *
-     * @param queries The queries to append
-     *
-     * @return The new query
+     * @return The query builder
      */
-    Query append(Query... queries);
+    static Query.Builder builder() {
+        return Sponge.getRegistry().createBuilder(Query.Builder.class);
+    }
 
     /**
      * Returns a new query matching any of the queries.
@@ -47,7 +49,20 @@ public interface Query {
      *
      * @return The new query
      */
-    Query or(Query... queries);
+    static Query orQueries(Query... queries) {
+        return builder().or(queries).build();
+    }
+
+    /**
+     * Returns a new query which combines the queries in given order with {@link Inventory#union}
+     *
+     * @param queries The queries to combine
+     *
+     * @return The new query
+     */
+    static Query andQueries(Query... queries) {
+        return builder().and(queries).build();
+    }
 
     /**
      * Executes this query on given inventory
@@ -57,4 +72,32 @@ public interface Query {
      * @return The query result
      */
     Inventory execute(Inventory inventory);
+
+    interface Builder extends ResettableBuilder<Query, Query.Builder> {
+
+        /**
+         * Builds a new query matching any of the queries.
+         *
+         * @param queries The queries to match
+         *
+         * @return This builder
+         */
+        Builder or(Query... queries);
+
+        /**
+         * Builds a new query which combines the queries in given order with {@link Inventory#union}
+         *
+         * @param queries The queries to combine
+         *
+         * @return This builder
+         */
+        Builder and(Query... queries);
+
+        /**
+         * Builds the composite query.
+         *
+         * @return The new composity query.
+         */
+        Query build();
+    }
 }

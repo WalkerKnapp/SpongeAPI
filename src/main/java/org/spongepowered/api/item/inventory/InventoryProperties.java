@@ -46,7 +46,8 @@ public final class InventoryProperties {
     // SORTFIELDS:ON
 
     // TODO new properties
-    public static final Property<PluginContainer> CREATOR = null;
+    public static final Property<PluginContainer> PLUGIN = null;
+
     public static final Property<Integer> MAX_STACK_SIZE = null;
 
     /**
@@ -54,21 +55,6 @@ public final class InventoryProperties {
      */
     public static final Property<EquipmentType> EQUIPMENT_TYPE =
             DummyObjectProvider.createFor(Property.class, "EQUIPMENT_TYPE");
-
-    /**
-     * Represents the capacity of a inventory.
-     * TODO not present in impl | do we need this for query? {@link Inventory#capacity()} exists
-     *
-     */
-    public static final Property<Integer> CAPACITY =
-            DummyObjectProvider.createFor(Property.class, "CAPACITY");
-
-    /**
-     * Represents the dimension of a inventory.
-     * TODO not present in impl | do we need this for query? {@link GridInventory#getRows()} and {@link GridInventory#getColumns()} exists
-     */
-    public static final Property<Vector2i> DIMENSION =
-            DummyObjectProvider.createFor(Property.class, "DIMENSION");
 
     /**
      * Represents the index of a slot.

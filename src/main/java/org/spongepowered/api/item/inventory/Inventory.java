@@ -439,6 +439,15 @@ public interface Inventory extends Nameable, PropertyHolder {
     boolean containsInventory(Inventory inventory);
 
     /**
+     * Returns true if the given inventory is a direct child of this one.
+     *
+     * @param child the child inventory to check for.
+     *
+     * @return whether the given inventory is a direct child of this one.
+     */
+    boolean containsChild(Inventory child);
+
+    /**
      * Returns this inventory as a viewable inventory if possible.
      *
      * <p>Not all inventories are viewable (e.g. a custom inventory of size 5x5)</p>
