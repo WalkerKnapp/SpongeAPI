@@ -36,7 +36,7 @@ import javax.annotation.Nullable;
 /**
  * Events that fire when commands are executed.
  */
-public interface CommandExecuteEvent extends Event {
+public interface ExecuteCommandEvent extends Event {
 
     /**
      * Gets the command that were requested by the {@link Cause} before any
@@ -77,7 +77,7 @@ public interface CommandExecuteEvent extends Event {
     /**
      * Fired before the command is executed.
      */
-    interface Pre extends CommandExecuteEvent, Cancellable {
+    interface Pre extends ExecuteCommandEvent, Cancellable {
 
         /**
          * Sets the command as a string, without any sort of command prefix.
@@ -138,28 +138,14 @@ public interface CommandExecuteEvent extends Event {
     /**
      * Fired after the command is executed.
      */
-    interface Post extends CommandExecuteEvent {
+    interface Post extends ExecuteCommandEvent {
 
         /**
-         * Gets the original result of the command that was executed.
+         * The result of the command.
          *
          * @return The result
          */
-        CommandResult getOriginalResult();
-
-        /**
-         * The result of the command to return to consumers.
-         *
-         * @return The result of the command
-         */
         CommandResult getResult();
-
-        /**
-         * Sets the result of the command to return to consumers.
-         *
-         * @param result The result of the command
-         */
-        void setResult(CommandResult result);
     }
 
 }
