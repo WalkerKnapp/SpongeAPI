@@ -125,7 +125,9 @@ public interface CommandExecuteEvent extends Event {
         boolean isCancelled();
 
         /**
-         * Sets whether the command will run.
+         * Sets whether the command will run. If the command is cancelled using
+         * this method, an appropriate {@link CommandResult} will be set (and
+         * returned from {@link #getResult()}).
          *
          * @param cancel The new cancelled state
          */
