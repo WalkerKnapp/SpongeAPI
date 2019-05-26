@@ -64,10 +64,10 @@ import javax.annotation.Nullable;
  * as required. This <em>may</em> enable the use of client side command
  * completions, if the implementation is equipped to do so.</p>
  *
- * <p>Commands in Sponge are provided with a {@link Cause}, which explains
- * who <strong>directly</strong> invoked the command. In line with causes used
- * in events, you may assume that the {@link Cause#root()} is the
- * <strong>intended</strong> direct invoker.</p>
+ * <p>Commands in Sponge are provided with a {@link CommandCause}, which
+ * provides a {@link Cause} explains who <strong>directly</strong> invoked the
+ * command. In line with causes used in events, you may assume that the
+ * {@link Cause#root()} is the <strong>intended</strong> direct invoker.</p>
  *
  * <p>It is <em>very</em> important to note that no object in the {@link Cause}
  * is guaranteed to be a traditional "command source" - a plugin may invoke a
@@ -87,12 +87,16 @@ import javax.annotation.Nullable;
  * be handled, in addition to using the provided cause stack:</p>
  *
  * <ul>
- *     <li>{@link EventContextKeys#MESSAGE_CHANNEL}, which indicates the
+ *     <li>{@link EventContextKeys#MESSAGE_TARGET}, which indicates the
  *     where messages that should be sent back to the invoker should be sent
  *     to (typically messages indicating the status of the command execution);
- *     and,</li>
+ *     </li>
  *     <li>{@link EventContextKeys#SUBJECT}, which indicates the subject that
- *     should be subjected to any permission checks.</li>
+ *     should be subjected to any permission checks;</li>
+ *     <li>{@link EventContextKeys#LOCATION}, which indicates the location that
+ *     the command should be assumed to be executed around; and,</li>
+ *     <li>{@link EventContextKeys#BLOCK_TARGET, which indicates the block that
+ *     the command should take into account when executing.}</li>
  * </ul>
  */
 public interface Command {
@@ -112,12 +116,12 @@ public interface Command {
      * <p>The implementing class must perform the necessary permission
      * checks.</p>
      *
-     * @param cause The {@link Cause} of the invocation of command
+     * @param cause The {@link CommandCause} of the invocation of command
      * @param arguments The raw arguments for this command
      * @return The result of a command being processed
      * @throws CommandException Thrown on a command error
      */
-    CommandResult process(Cause cause, String arguments) throws CommandException;
+    CommandResult process(CommandCause cause, String arguments) throws CommandException;
 
     /**
      * Gets a list of suggestions based on input.
@@ -125,14 +129,14 @@ public interface Command {
      * <p>If a suggestion is chosen by the user, it will replace the last
      * word.</p>
      *
-     * @param cause The {@link Cause} of the command
+     * @param cause The {@link CommandCause} of the command
      * @param arguments The arguments entered up to this point
      * @param targetPosition The position the source is looking at when
      *     performing tab completion
      * @return A list of suggestions
      * @throws CommandException Thrown if there was a parsing error
      */
-    List<String> getSuggestions(Cause cause, String arguments, @Nullable Location targetPosition) throws CommandException;
+    List<String> getSuggestions(CommandCause cause, String arguments, @Nullable Location targetPosition) throws CommandException;
 
     /**
      * Test whether this command can probably be executed given this
@@ -146,7 +150,7 @@ public interface Command {
      * @param cause The {@link Cause} to check
      * @return Whether this command will execute
      */
-    boolean canExecute(Cause cause);
+    boolean canExecute(CommandCause cause);
 
     /**
      * Gets a short one-line description of this command.
@@ -156,7 +160,7 @@ public interface Command {
      * @param cause The {@link Cause} of the help request
      * @return A description
      */
-    Optional<Text> getShortDescription(Cause cause);
+    Optional<Text> getShortDescription(CommandCause cause);
 
     /**
      * Gets a longer formatted help message about this command.
@@ -173,7 +177,7 @@ public interface Command {
      * @param cause The {@link Cause} of the help request
      * @return A help text
      */
-    Optional<Text> getHelp(Cause cause);
+    Optional<Text> getHelp(CommandCause cause);
 
     /**
      * Gets the usage string of this command.
@@ -186,7 +190,7 @@ public interface Command {
      * @param cause The {@link Cause} of the help request
      * @return A usage string
      */
-    Text getUsage(Cause cause);
+    Text getUsage(CommandCause cause);
 
     /**
      * A {@link Command} that has distinct steps for parsing arguments and
@@ -209,13 +213,13 @@ public interface Command {
          * @param arguments The argument {@link String}
          * @return The {@link CommandContext}
          */
-        CommandContext parseArguments(Cause cause, String arguments);
+        CommandContext parseArguments(CommandCause cause, String arguments);
 
         /**
          * Processes the command by parsing the arguments, then
          * executing command based on these arguments.
          *
-         * <p>By default, this will call {@link #parseArguments(Cause, String)}
+         * <p>By default, this will call {@link #parseArguments(CommandCause, String)}
          * and pass the resulting {@link CommandContext} to
          * {@link #execute(CommandContext)}.</p>
          *
@@ -224,7 +228,7 @@ public interface Command {
          * @return The result of a command being processed
          * @throws CommandException Thrown on a command error
          */
-        default CommandResult process(Cause cause, String arguments) throws CommandException {
+        default CommandResult process(CommandCause cause, String arguments) throws CommandException {
             return execute(parseArguments(cause, arguments));
         }
 
@@ -363,7 +367,7 @@ public interface Command {
          *      relevant description based on the supplied {@link Cause}
          * @return This builder, for chaining
          */
-        Builder setExtendedDescription(Function<Cause, Optional<Text>> extendedDescriptionFunction);
+        Builder setExtendedDescription(Function<CommandCause, Optional<Text>> extendedDescriptionFunction);
 
         /**
          * Provides the description for this command.
@@ -393,7 +397,7 @@ public interface Command {
          *      description based on the supplied {@link Cause}
          * @return This builder, for chaining
          */
-        Builder setShortDescription(Function<Cause, Optional<Text>> descriptionFunction);
+        Builder setShortDescription(Function<CommandCause, Optional<Text>> descriptionFunction);
 
         /**
          * Provides a simple description for this command, typically no more
@@ -424,7 +428,7 @@ public interface Command {
          * during execution.</p>
          *
          * <p>Any permission checks set here will be performed during the
-         * {@link Command#canExecute(Cause)}.</p>
+         * {@link Command#canExecute(CommandCause)}.</p>
          *
          * <p>Calling this repeatedly will not add additional permission
          * checks, instead replacing the permission check. If multiple
@@ -445,7 +449,7 @@ public interface Command {
          * from {@link #setPermission(String)}</p>
          *
          * <p>Any requirements set here will be performed during the
-         * {@link Command#canExecute(Cause)}.</p>
+         * {@link Command#canExecute(CommandCause)}.</p>
          *
          * <p>Calling this repeatedly will not add additional checks, instead
          * replacing the previous requirements.</p>
@@ -453,7 +457,7 @@ public interface Command {
          * @param executionRequirements A function that sets the
          * @return This builder, for chaining
          */
-        Builder setExecutionRequirements(@Nullable Predicate<Cause> executionRequirements);
+        Builder setExecutionRequirements(@Nullable Predicate<CommandCause> executionRequirements);
 
         /**
          * Builds this command, creating a {@link Command.Parameterized}

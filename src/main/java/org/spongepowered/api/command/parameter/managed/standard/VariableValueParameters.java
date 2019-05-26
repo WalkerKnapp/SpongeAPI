@@ -48,7 +48,6 @@ public class VariableValueParameters {
      *
      * @return The builder
      */
-    // TODO: Better solution?
     @SuppressWarnings("unchecked")
     public static CatalogedTypeBuilder<? extends CatalogType> catalogedElementParameterBuilder() {
         return (CatalogedTypeBuilder<? extends CatalogType>) Sponge.getRegistry().createBuilder(CatalogedTypeBuilder.class);
@@ -82,14 +81,6 @@ public class VariableValueParameters {
 
     /**
      * Creates a builder that builds a {@link ValueParameter} that tries to
-     * match an argument with a value from a specified enum case-insensitively.
-     */
-    public static EnumBuilder<? extends Enum<?>> enumBuilder() {
-        return (EnumBuilder<? extends Enum<?>>) Sponge.getRegistry().createBuilder(EnumBuilder.class);
-    }
-
-    /**
-     * Creates a builder that builds a {@link ValueParameter} that tries to
      * match an a series of arguments with a supplied literal.
      */
     public static LiteralBuilder<?> literalBuilder() {
@@ -102,6 +93,14 @@ public class VariableValueParameters {
      */
     public static TextBuilder textBuilder() {
         return Sponge.getRegistry().createBuilder(TextBuilder.class);
+    }
+
+    /**
+     * Creates a builder that builds a {@link ValueParameter} that tries to
+     * match an argument with a value from a specified enum case-insensitively.
+     */
+    public static <T extends Enum<T>> ValueParameter<T> enumChoices(Class<T> enumClass) {
+        return Sponge.getRegistry().requireFactory(EnumFactory.class).from(enumClass);
     }
 
     /**
@@ -322,6 +321,22 @@ public class VariableValueParameters {
          */
         ValueParameter<T> build();
 
+    }
+
+    /**
+     * A factory that creates a {@link ValueParameter} that tries to
+     * match an argument with a value from a specified enum case-insensitively
+     */
+    public interface EnumFactory {
+
+        /**
+         * Creates the {@link ValueParameter}
+         *
+         * @param enumClass The {@link Enum} type to base the choices on
+         * @param <T> The type of {@link Enum}
+         * @return The {@link ValueParameter}
+         */
+        <T extends Enum<T>> ValueParameter<T> from(Class<T> enumClass);
     }
 
     /**

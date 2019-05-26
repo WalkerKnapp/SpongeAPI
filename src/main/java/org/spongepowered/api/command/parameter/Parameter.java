@@ -28,6 +28,7 @@ import com.flowpowered.math.vector.Vector3d;
 import org.spongepowered.api.CatalogType;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.Command;
+import org.spongepowered.api.command.CommandCause;
 import org.spongepowered.api.command.CommandExecutor;
 import org.spongepowered.api.command.exception.ArgumentParseException;
 import org.spongepowered.api.command.parameter.managed.ValueCompleter;
@@ -85,7 +86,7 @@ import javax.annotation.Nullable;
  *     <li>{@link Subcommand}s can be placed anywhere in a parameter
  *     chain where a {@link Parameter} can be added, if successfully parsed,
  *     any containing {@link Command} would take precedence and its
- *     {@link Command#process(Cause, String)} method will be called instead
+ *     {@link Command#process(org.spongepowered.api.command.CommandCause, String)} method will be called instead
  *     of any parent.</li>
  * </ul>
  *
@@ -349,7 +350,7 @@ public interface Parameter {
      * @return A {@link Parameter.Value.Builder}
      */
     static Parameter.Value.Builder<Entity> entityOrSource() {
-        return entity().orDefault(cause -> cause.root() instanceof Entity ? (Entity) cause.root() : null);
+        return entity().orDefault(cause -> cause.getCause().root() instanceof Entity ? (Entity) cause.getCause().root() : null);
     }
 
     /**
@@ -410,7 +411,8 @@ public interface Parameter {
      * @return A {@link Parameter.Value.Builder}
      */
     static Parameter.Value.Builder ipOrSource() {
-        return ip().orDefault(cause -> cause.root() instanceof RemoteConnection ? ((RemoteConnection) cause.root()).getAddress().getAddress() : null);
+        return ip().orDefault(cause -> cause.getCause().root() instanceof RemoteConnection ?
+                ((RemoteConnection) cause.getCause().root()).getAddress().getAddress() : null);
     }
 
     /**
@@ -471,7 +473,7 @@ public interface Parameter {
      * @return A {@link Parameter.Value.Builder}
      */
     static Parameter.Value.Builder<Player> playerOrSource() {
-        return player().orDefault(cause -> cause.root() instanceof Player ? (Player) cause.root() : null);
+        return player().orDefault(cause -> cause.getCause().root() instanceof Player ? (Player) cause.getCause().root() : null);
     }
 
     /**
@@ -552,7 +554,7 @@ public interface Parameter {
      * @return A {@link Parameter.Value.Builder}
      */
     static Parameter.Value.Builder<User> userOrSource() {
-        return user().orDefault(cause -> cause.root() instanceof User ? (User) cause.root() : null);
+        return user().orDefault(cause -> cause.getCause().root() instanceof User ? (User) cause.getCause().root() : null);
     }
 
     /**
@@ -669,7 +671,7 @@ public interface Parameter {
      * @return A {@link Parameter.Value.Builder}
      */
     static <T extends Enum<T>> Parameter.Value.Builder enumValue(Class<T> enumClass) {
-        return Parameter.builder(enumClass, VariableValueParameters.enumBuilder().setEnumClass(enumClass).build());
+        return Parameter.builder(enumClass, VariableValueParameters.enumChoices(enumClass));
     }
 
     /**
@@ -729,10 +731,10 @@ public interface Parameter {
     /**
      * Gets the usage of this parameter.
      *
-     * @param cause The {@link Cause} that requested the usage
+     * @param cause The {@link CommandCause} that requested the usage
      * @return The usage
      */
-    Text getUsage(Cause cause);
+    Text getUsage(CommandCause cause);
 
     /**
      * A {@link Key}
@@ -823,7 +825,7 @@ public interface Parameter {
          *
          * @return the predicate
          */
-        Predicate<Cause> getRequirement();
+        Predicate<CommandCause> getRequirement();
 
         /**
          * Gets whether this parameter is optional.
@@ -937,7 +939,7 @@ public interface Parameter {
              * @param executionRequirements A function that sets the
              * @return This builder, for chaining
              */
-            Builder<T> setRequirements(@Nullable Predicate<Cause> executionRequirements);
+            Builder<T> setRequirements(@Nullable Predicate<CommandCause> executionRequirements);
 
             /**
              * If set, this parameter will repeat until the argument string has
@@ -1031,7 +1033,7 @@ public interface Parameter {
              *                             if the parameter is not optional.
              * @return This builder, for chaining
              */
-            Builder<T> orDefault(Function<Cause, T> defaultValueFunction);
+            Builder<T> orDefault(Function<CommandCause, T> defaultValueFunction);
 
             /**
              * Creates a {@link Parameter} from the builder.
